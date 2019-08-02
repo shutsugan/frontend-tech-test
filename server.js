@@ -1,7 +1,11 @@
 'use strict';
 
 const app = require('express')();
+const cors = require('cors');
+
 const tasksContainer = require('./tasks.json');
+
+app.use(cors());
 
 /**
  * GET /tasks
