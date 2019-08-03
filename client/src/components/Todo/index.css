@@ -1,0 +1,23 @@
+.todo {}
+
+.todo__info {
+    color: var(--sub-title);
+    font-size: .9rem;
+}
+
+.todo__remove-button {
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    background: var(--main);
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .15s ease-in;
+}
+
+.todo__remove-button:hover {
+    transform: scale(1.1);
+}
+
