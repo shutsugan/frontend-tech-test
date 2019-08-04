@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const base_url = 'http://localhost:9001';
 
-const save = async (actions, method, url, callback) => {
+const noop = _ => {};
+const save = async (actions, method, url, callback = noop) => {
     const res = await axios[method](`${base_url}/task/${url}`);
     const { task, message } = await res.data;
 
@@ -11,13 +12,19 @@ const save = async (actions, method, url, callback) => {
     actions.setMessage(message);
 };
 
+const checkProps = (actions, title, description) => {
+    if (!title && !description) return actions.setMessage('Fields are reuqired');
+};
+
 export default {
     todos: [],
-    message: '',
+    selectedTodo: null,
+    message: null,
 
     list: computed(state => Object.values(state.todos)),
 
     setMessage: action((state, message) => state.message = message),
+    selectTodo: action((state, todo) => state.selectedTodo = todo),
     added: action((state, todo) => state.todos[todo.id] = todo),
 
     fetched: action((state, payload = []) => {
@@ -35,25 +42,35 @@ export default {
         actions.fetched(tasks);
     }),
 
-    addTodo: thunk(async (actions, { id, title, description }) => {
-        if (!title && !description) {
-            return actions.setMessage('Fields are reuqired');
-        }
+    addTodo: thunk(async (actions, { title, description }) => {
+        checkProps(actions, title, description);
+        save(
+            actions,
+            'post',
+            `create/${title}/${description}`,
+            todo => actions.added(todo)
+        );
+    }),
 
-        if (id) {
-            save(
-                actions,
-                'put',
-                `update/${id}/${title}/${description}`,
-                todo => actions.updated(todo)
-            );
-        } else {
-            save(
-                actions,
-                'post',
-                `create/${title}/${description}`,
-                todo => actions.added(todo)
-            );
-        }
+    updateTodo: thunk(async (actions, { id, title, description }) => {
+        checkProps(actions, title, description);
+        save(
+            actions,
+            'put',
+            `update/${id}/${title}/${description}`,
+            _ => {
+                actions.fetchTodos();
+                actions.selectTodo(null);
+            }
+        );
+    }),
+
+    removeTodo: thunk(async (actions, id) => {
+        save(
+            actions,
+            'delete',
+            `delete/${id}`,
+            _ => actions.fetchTodos()
+        );
     })
 };
