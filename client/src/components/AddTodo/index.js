@@ -1,18 +1,40 @@
-import React, { useState } from 'react';
-import { useStoreActions } from 'easy-peasy';
+import React, { useState, useEffect } from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
 import './index.css';
 
 const AddTodo = _ => {
+    const [id, setId] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
+    const selectedTodo = useStoreState(state => state.todos.selectedTodo);
+
+    useEffect(_ => {
+        let id, title, description = '';
+
+        if (selectedTodo) {
+            id = selectedTodo.id;
+            title = selectedTodo.title;
+            description = selectedTodo.description;
+        }
+
+        setId(id);
+        setTitle(title);
+        setDescription(description);
+    }, [selectedTodo]);
+
     const addTodo = useStoreActions(actions => actions.todos.addTodo);
+    const updateTodo = useStoreActions(actions => actions.todos.updateTodo);
+    
     const handleChange = ({ target }, setter) => setter(target.value);
 
     const handleAddTodo = async _ => {
-        await addTodo({ title, description });
+        !selectedTodo
+            ? await addTodo({ title, description })
+            : await updateTodo({ id, title, description });
 
+        setId('');
         setTitle('');
         setDescription('');
     };
