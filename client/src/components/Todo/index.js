@@ -1,8 +1,11 @@
 import React from 'react';
+import { useStoreActions } from 'easy-peasy';
 
 import './index.css';
 
 const Todo = ({ id, title, description }) => {
+    const selectTodo = useStoreActions(actions => actions.todos.selectTodo);
+    const removeTodo = useStoreActions(actions => actions.todos.removeTodo);
 
     return (
         <div className="todo flex space-between pdt-8 br-bottom">
@@ -11,8 +14,16 @@ const Todo = ({ id, title, description }) => {
             <p className="todo__info mr-none mrs-8">{ description }</p>
             </div>
             <div className="flex center pd-8">
-                <a className="link mrr-16">Edit</a>
-                <div className="todo__remove-button flex center">x</div>
+                <span
+                    className="link mrr-16"
+                    onClick={_ => selectTodo({ id, title, description})}>
+                    Edit
+                </span>
+                <div
+                    className="todo__remove-button flex center"
+                    onClick={_ => removeTodo(id)}>
+                    x
+                </div>
             </div>
         </div>
     );
