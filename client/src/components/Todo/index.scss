@@ -1,5 +1,3 @@
-.todo {}
-
 .todo__info {
     color: var(--sub-title);
     font-size: .9rem;
@@ -15,9 +13,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: transform .15s ease-in;
+    &:hover {
+        transform: scale(1.1);
+    }
 }
-
-.todo__remove-button:hover {
-    transform: scale(1.1);
-}
-

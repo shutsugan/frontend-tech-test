@@ -4,7 +4,7 @@ import { useStoreActions } from 'easy-peasy';
 import TodosList from '../TodosList';
 import AddTodo from '../AddTodo';
 
-import './index.css';
+import './index.scss';
 
 const App = _ => {
   const initialiseTodos = useStoreActions(actions => actions.initialiseTodos);

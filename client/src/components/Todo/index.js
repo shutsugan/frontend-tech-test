@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStoreActions } from 'easy-peasy';
 
-import './index.css';
+import './index.scss';
 
 const Todo = ({ id, title, description }) => {
     const selectTodo = useStoreActions(actions => actions.todos.selectTodo);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import './index.css';
+import './index.scss';
 
 const AddTodo = _ => {
     const [id, setId] = useState('');

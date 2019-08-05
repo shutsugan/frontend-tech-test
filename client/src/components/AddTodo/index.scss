@@ -1,22 +1,18 @@
-.add-todo {}
-
 .required {
     text-transform: capitalize;
     color: var(--label);
-}
-
-.required::after {
-    content: '*';
-    color: var(--secondary);
+    &::after {
+        content: '*';
+        color: var(--secondary);
+    }
 }
 
 .field__input {
-    border: solid .5px var(--border);
+    border: solid 0.5px var(--border);
     border-radius: var(--radius);
     outline: none;
     transition: border-color var(--duration) var(--transition);
-}
-
-.field__input:focus {
-    border-color: var(--main);
+    &:focus {
+        border-color: var(--main);
+    }
 }
