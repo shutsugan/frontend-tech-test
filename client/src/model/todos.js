@@ -23,6 +23,7 @@ export default {
 
     list: computed(state => Object.values(state.todos)),
 
+    //actions
     setMessage: action((state, message) => state.message = message),
     selectTodo: action((state, todo) => state.selectedTodo = todo),
     added: action((state, todo) => state.todos[todo.id] = todo),
@@ -35,7 +36,9 @@ export default {
         }, {});
     }),
 
-    fetchTodos: thunk(async actions => {
+    //thunks
+    fetchTodos: thunk(async (actions, _, { injections }) => {
+        const { axios } = injections
         const res = await axios.get(`${base_url}/tasks`);
         const { tasks } = await res.data;
 
