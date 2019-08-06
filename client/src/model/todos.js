@@ -1,10 +1,9 @@
 import { action, computed, thunk } from "easy-peasy";
-import axios from 'axios';
 
 const base_url = 'http://localhost:9001';
 
 const noop = _ => {};
-const save = async (actions, method, url, callback = noop) => {
+export const save = async (axios, actions, method, url, callback = noop) => {
     const res = await axios[method](`${base_url}/task/${url}`);
     const { task, message } = await res.data;
 
@@ -12,7 +11,7 @@ const save = async (actions, method, url, callback = noop) => {
     actions.setMessage(message);
 };
 
-const checkProps = (actions, title, description) => {
+export const checkProps = (actions, title, description) => {
     if (!title && !description) return actions.setMessage('Fields are reuqired');
 };
 
@@ -45,9 +44,12 @@ export default {
         actions.fetched(tasks);
     }),
 
-    addTodo: thunk(async (actions, { title, description }) => {
+    addTodo: thunk(async (actions, { title, description }, { injections }) => {
+        const { axios } = injections
+
         checkProps(actions, title, description);
         save(
+            axios,
             actions,
             'post',
             `create/${title}/${description}`,
@@ -55,9 +57,12 @@ export default {
         );
     }),
 
-    updateTodo: thunk(async (actions, { id, title, description }) => {
+    updateTodo: thunk(async (actions, { id, title, description }, { injections }) => {
+        const { axios } = injections;
+
         checkProps(actions, title, description);
         save(
+            axios,
             actions,
             'put',
             `update/${id}/${title}/${description}`,
@@ -68,8 +73,11 @@ export default {
         );
     }),
 
-    removeTodo: thunk(async (actions, id) => {
+    removeTodo: thunk(async (actions, id, { injections }) => {
+        const { axios } = injections;
+
         save(
+            axios,
             actions,
             'delete',
             `delete/${id}`,
