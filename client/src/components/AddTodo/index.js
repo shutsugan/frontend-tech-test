@@ -44,6 +44,7 @@ const AddTodo = _ => {
             <div className="fleid flex-column start mrb-16 relative">
                 <label className="required">Title</label>
                 <input
+                    aria-label="title"
                     className="field__input full pd-16"
                     value={title}
                     onChange={event => handleChange(event, setTitle)}
@@ -52,12 +53,14 @@ const AddTodo = _ => {
             <div className="fleid flex-column start mrb-16 relative">
                 <label className="required">Description</label>
                 <textarea
+                    aria-label="description"
                     className="field__input full pd-16 ht-80"
                     value={description}
                     onChange={event => handleChange(event, setDescription)}>                
                 </textarea>
             </div>
             <button
+                aria-label="button"
                 className="button full pd-16"
                 onClick={handleAddTodo}>
                 Add Todo

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodosList component should render todos list component 1`] = `
+<div
+  className="todo-list card full flex-column mrb-16"
+/>
+`;

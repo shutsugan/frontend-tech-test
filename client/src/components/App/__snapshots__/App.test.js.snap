@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component should render the app component 1`] = `
+<div
+  className="app half mr-auto flex-column center pd-16"
+>
+  <div
+    className="todo-list card full flex-column mrb-16"
+  />
+  <div
+    className="add-todo full"
+  >
+    <div
+      className="fleid flex-column start mrb-16 relative"
+    >
+      <label
+        className="required"
+      >
+        Title
+      </label>
+      <input
+        aria-label="title"
+        className="field__input full pd-16"
+        onChange={[Function]}
+        value=""
+      />
+    </div>
+    <div
+      className="fleid flex-column start mrb-16 relative"
+    >
+      <label
+        className="required"
+      >
+        Description
+      </label>
+      <textarea
+        aria-label="description"
+        className="field__input full pd-16 ht-80"
+        onChange={[Function]}
+        value=""
+      />
+    </div>
+    <button
+      aria-label="button"
+      className="button full pd-16"
+      onClick={[Function]}
+    >
+      Add Todo
+    </button>
+  </div>
+</div>
+`;
