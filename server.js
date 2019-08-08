@@ -98,8 +98,10 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
  * Return status code 201.
  */
 app.post('/task/create/:title/:description', (req, res) => {
+  const container = tasksContainer.tasks;
+  console.log(container);
   const task = {
-    id: tasksContainer.tasks.length + 1,
+    id: container.length ? container[container.length - 1].id + 1 : 1,
     title: req.params.title,
     description: req.params.description,
   };
