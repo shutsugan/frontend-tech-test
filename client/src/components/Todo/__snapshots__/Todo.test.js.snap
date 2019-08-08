@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Todo component should render todo componenet 1`] = `
+<div
+  className="todo flex space-between pdt-8 br-bottom"
+>
+  <div>
+    <h3
+      className="mr-none mrs-8"
+    />
+    <p
+      className="todo__info mr-none mrs-8"
+    />
+  </div>
+  <div
+    className="flex center pd-8"
+  >
+    <span
+      className="link mrr-16"
+      onClick={[Function]}
+    >
+      Edit
+    </span>
+    <div
+      className="todo__remove-button flex center"
+      onClick={[Function]}
+    >
+      x
+    </div>
+  </div>
+</div>
+`;
