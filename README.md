@@ -2,6 +2,30 @@
 
 Travix Front-End Tech Interview Test 
 
+# Install
+
+clone the repo, cd in to it and run this command
+```shell
+npm i && cd client && npm i
+```
+
+to run the server and client side at the same time return
+```shell
+npm run dev
+```
+
+# Testing
+
+to run the server tests
+```shell
+npm t
+```
+
+to run the client tests, cd to client forlder then run
+```shell
+npm t
+```
+
 # Introduction
 
 The aim of the test is to develop a mini-application for managing TODO tasks.
