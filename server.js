@@ -12,7 +12,7 @@ app.use(cors());
  * 
  * Return the list of tasks with status code 200.
  */
-app.get('/tasks', (req, res) => {
+exports.get = app.get('/tasks', (req, res) => {
   return res.status(200).json(tasksContainer);
 });
 
@@ -31,8 +31,7 @@ app.get('/task/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   if (!Number.isNaN(id)) {
-    const task = tasks.Container.find((item) => item.id === id);
-
+    const task = tasksContainer.tasks.find((item) => item.id === id);
     if (task !== null) {
       return res.status(200).json({
         task,
@@ -66,14 +65,14 @@ app.put('/task/update/:id/:title/:description', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-
-    if (task !== null) {
+    if (task) {
       tasksContainer.tasks[id] = {
         id,
         title: req.params.title,
         description: req.params.description
       }
-      return res.status(204).json({
+
+      return res.status(201).json({
         message: 'Todo Updated',
         task: tasksContainer.tasks[id]
       });
@@ -129,17 +128,17 @@ app.delete('/task/delete/:id', (req, res) => {
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
   
-    if (task !== null) {
+    if (task) {
       tasksContainer.tasks = tasksContainer.tasks.filter(task => {
         if (task.id !== id) return task;
       });
 
       return res.status(200).json({
-        message: 'Updated successfully',
+        message: 'Deleted successfully',
         task
       });
     } else {
-      return es.status(404).json({
+      return res.status(404).json({
         message: 'Not found',
       });
     }
